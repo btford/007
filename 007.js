@@ -3,7 +3,6 @@ var noop = function () {};
 
 var makeMockFn = function () {
   var mockFn = function () {
-    console.log(mockFn);
     mockFn.callHistory.push(Array.prototype.slice.call(arguments, 0));
     mockFn.callCount += 1;
     return mockFn.implementation.apply(this, arguments);
@@ -34,18 +33,30 @@ var makeMockFn = function () {
   return mockFn;
 };
 
-module.exports = function doubleOhSeven (api) {
-  if (typeof api === 'function') {
-    return makeMockFn();
-  } else if (api instanceof Array) {
-    return api.map(doubleOhSeven);
-  } else if (api !== null && typeof api === 'object') {
-    return Object.keys(api).
-      reduce(function (newObj, prop) {
+module.exports = function (api) {
+  var originals = [],
+    mocks = [];
+
+  return (function doubleOhSeven (api) {
+    var mock;
+
+    if (originals.indexOf(api) !== -1) {
+      return mocks[originals.indexOf(api)];
+    } else if (typeof api === 'function') {
+      mock = makeMockFn();
+    } else if (api instanceof Array) {
+      mock = api.map(doubleOhSeven);
+    } else if (api !== null && typeof api === 'object') {
+      mock = Object.keys(api).
+        reduce(function (newObj, prop) {
           newObj[prop] = doubleOhSeven(api[prop]);
-        return newObj;
-      }, {});
-  } else { // not a fn, obj, or array
-    return api;
-  }
+          return newObj;
+        }, {});
+    } else { // not a fn, obj, or array
+      return api;
+    }    
+    originals.push(api);
+    mocks.push(mock);
+    return mock;
+  }(api));
 };
