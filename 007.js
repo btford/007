@@ -1,4 +1,3 @@
-
 var noop = function () {};
 
 var makeMockFn = function () {
@@ -42,7 +41,7 @@ module.exports = function doubleOhSeven (api) {
   } else if (api !== null && typeof api === 'object') {
     return Object.keys(api).
       reduce(function (newObj, prop) {
-          newObj[prop] = doubleOhSeven(api[prop]);
+        newObj[prop] = doubleOhSeven(api[prop]);
         return newObj;
       }, {});
   } else { // not a fn, obj, or array
