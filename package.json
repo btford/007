@@ -1,0 +1,24 @@
+{
+  "name": "007",
+  "version": "0.0.0",
+  "description": "Returns a deep copy of an object with all functions converted to spies",
+  "main": "007.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/btford/007.git"
+  },
+  "keywords": [
+    "testing",
+    "test",
+    "mock",
+    "spy"
+  ],
+  "author": "Brian Ford",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/btford/007/issues"
+  }
+}
