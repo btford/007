@@ -62,7 +62,7 @@ mockFn(function (arg) {
 });
 ```
 
-#### `mockFn.callbackArgs`
+#### `mockFn.callbackArgs()`
 
 The callback args to be invoked by the mock.
 
