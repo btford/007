@@ -1,4 +1,5 @@
 # 007
+[![Build Status](https://travis-ci.org/btford/007.png?branch=master)](https://travis-ci.org/btford/007)
 
 Returns a deep copy of an object with all functions converted to spies.
 
