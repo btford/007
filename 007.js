@@ -47,16 +47,19 @@ module.exports = function (api) {
     } else if (api instanceof Array) {
       mock = api.map(doubleOhSeven);
     } else if (api !== null && typeof api === 'object') {
-      mock = Object.keys(api).
-        reduce(function (newObj, prop) {
-          newObj[prop] = doubleOhSeven(api[prop]);
-          return newObj;
-        }, {});
+      mock = {};
     } else { // not a fn, obj, or array
       return api;
     }    
     originals.push(api);
     mocks.push(mock);
+    if (typeof api === 'object') {
+      Object.keys(api).
+        reduce(function (newObj, prop) {
+          newObj[prop] = doubleOhSeven(api[prop]);
+          return newObj;
+        }, mock);
+    }
     return mock;
   }(api));
 };
