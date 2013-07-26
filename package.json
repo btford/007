@@ -1,6 +1,6 @@
 {
   "name": "007",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Returns a deep copy of an object with all functions converted to spies",
   "main": "007.js",
   "scripts": {
