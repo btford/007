@@ -54,7 +54,13 @@ module.exports = function (api) {
     originals.push(api);
     mocks.push(mock);
     if (typeof api === 'object') {
-      Object.keys(api).
+      // we want the full proto chain
+      var keys = [], key;
+      for (key in api) {
+        keys.push(key);
+      }
+
+      keys.
         reduce(function (newObj, prop) {
           newObj[prop] = doubleOhSeven(api[prop]);
           return newObj;
